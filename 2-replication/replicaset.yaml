@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset-2
+  # this label doesnt matter for the selector
+  labels:
+    app: myapp-2
+spec:
+  selector:
+    matchLabels:
+    # this label matches with the ../pods/nginx.yaml pod file
+      env: production
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-2
+      labels:
+      # this label matters
+        env: production
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
